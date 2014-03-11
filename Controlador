@@ -1,0 +1,186 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda 
+	Twitter: @arithgrey
+	Mail: arithgrey@gmail.com	
+
+*/
+package excep;
+public class Controlador {
+
+	/*Arreglos provisionales*/
+	private String Contraseñas[];
+	private int listaCategorias[];
+
+	public Controlador() {
+		this.Contraseñas=new String[101];
+		this.listaCategorias=new int[101];
+	}
+	
+	/*Método para crear nuevas contraseñas*/
+	public void indxContrasena(){
+		
+		int a=0;		
+		while(a<=Contraseñas.length-1){ /*Ciclo*/
+			metodos generador=new metodos();	 		
+			this.Contraseñas[a]=generador.geneID();
+			
+			a++;
+		}
+	
+	}
+	
+	/*Método que retorna el conjunto de contraseñas encontradas en el arreglo contraseñas*/
+	public String getIndx(){
+		
+		String arr=""; /*variable que se retornará */
+		int a=1; 
+		while(a<=Contraseñas.length-1){ /*Iterador */
+			
+			arr+="\n"+a+".- "+this.Contraseñas[a];
+			a++;
+		}
+		return arr;
+		}
+	
+		/*Método para validar las contraseñas si el primer elemento no es cero filtra la cadena por tener un grado  de error*/
+		public String validando(){
+			int a=1;
+			String S="";
+			while(a<=Contraseñas.length-1){ /*Iterador */
+				
+				metodos o=new metodos();
+				listaCategorias[a]=o.validacioN(Contraseñas[a]);
+				
+				if (o.validacioN(Contraseñas[a])!=0){ /*Si el primer elemento es distinto de cero*/
+					S+="Error producido en...:"+a +"..TipoDe.Gravedad: "+ o.validacioN(Contraseñas[a])+"\n"; /*Error detectado.!!*/
+					
+				}a++;
+			}
+			return S; /*Retorna las cadenas erróneas  */
+		}
+		
+		/*Función que corrige las cadenas con error categoría 5  */
+		/*De acuerdo  a la categoría se atenderá el error de mayor a menor */
+		public String atendiendoErroresCat5(){
+
+			int a=1;
+			String S="Atendiendo prioridad 5  Grave!!\n\n";
+			while(a<=listaCategorias.length-1){ /*Ciclo */
+				
+				metodos o =new metodos();				
+				
+			 if (o.validacioN(Contraseñas[a])==5){ /*Si la cadena es categoría 5 */
+				 S+="Dando solucion a erro grave cat:5 en:..."+a+"\n"; 
+				
+				 while(o.validacioN(Contraseñas[a])==5 ){ /*Itera mientras la contraseña sea igual a 5 */
+					 Contraseñas[a]=o.geneID();
+					 S+="Localizando Solucion....."+a+"\n"; /*Imprime el informe */
+				 }
+				 S+="Error en pos..:"+ a +"Resuelto \n"; /*Informe de solución */
+			 }
+			 a++;
+			 }
+			return S;
+		}
+
+
+		/*Función que corrige las cadenas con error categoría 4*/
+		public String atendiendoErroresCat4(){
+
+			int a=1;
+			String S="Atendiendo prioridad 4 \n\n";
+				
+			while(a<=listaCategorias.length-1){ /*Ciclo*/
+				metodos o =new metodos();
+				
+				
+			 if (o.validacioN(Contraseñas[a])==4 ){/*Si la cadena es categoría 4 */
+				 S+="Dando solución a erro peligroso cat:4 en:..."+a+"\n";
+				 
+				 while(o.validacioN(Contraseñas[a])==4){  /*Itera mientras la contraseña sea igual a 5 */
+					 Contraseñas[a]=o.geneID();
+					 S+="Localizando Solución....."+a+"\n"; /*Informe de la solución */
+				 }
+				 S+="Error Resuelto .......En:"+ a +"...... \n"; /*informe de la solución concretada */
+			 }
+			 a++;
+			 }
+			return S; /*Regresa la solución*/
+		}
+
+		/*Función que corrige las cadenas con error categoría 3*/
+		public String atendiendoErroresCat3(){	
+
+			int a=1;
+			String S="Atendiendo prioridad 3 \n\n";
+				
+			while(a<=listaCategorias.length-1){
+				metodos o =new metodos();
+				
+				
+			 if (o.validacioN(Contraseñas[a])==3){
+				 S+="Error de prioridad media cat:3 en:..."+a+"\n";
+				
+				 
+	 while(o.validacioN(Contraseñas[a])==3){
+					 Contraseñas[a]=o.geneID();
+					 S+="Localizando Solución....."+a+"\n";
+					 S+="Solucionando........";
+				 }
+				 S+="Error Resuelto .........En"+ a +" \n";
+			 }
+			 a++;
+			 }
+			return S;
+		}
+
+		/*Función que corrige las cadenas con error categoría 2*/
+		public String atendiendoErroresCat2(){
+
+			int a=1;
+			String S="Atendiendo prioridad 2 bajo peligro \n\n";
+				
+			while(a<=listaCategorias.length-1){
+				metodos o =new metodos();
+				
+				
+			 if (o.validacioN(Contraseñas[a])==2){
+				 S+="Atendiendo erro  cat:2 en:..."+a+"\n";
+				 
+				 while(o.validacioN(Contraseñas[a])==2){
+					 Contraseñas[a]=o.geneID();
+					 S+="Localizando Solución....."+a+"\n";
+					 S+="Dado Solución........";
+				 }
+				 S+="Error Resuelto .........En"+ a +" \n";
+			 }
+			 a++;
+			 }
+			return S;
+		}
+		
+		/*Función que corrige las cadenas con error categoría 4*/
+		public String atendiendoErroresCat1(){
+
+			int a=1;
+			String S="Atendiendo menor prioridad 1  \n\n";
+				
+			while(a<=listaCategorias.length-1){
+				metodos o =new metodos();
+				
+				
+			 if (o.validacioN(Contraseñas[a])==1){
+				 S+="Atendiendo baja prioridad cat1 en:..."+a+"\n";
+				 while(o.validacioN(Contraseñas[a])==1){
+					 Contraseñas[a]=o.geneID();
+					 S+="Localizando solución...."+a+"\n";
+					 S+="Dado Solución........";
+				 }
+				 S+="Solución En......."+ a +" \n";
+			 }
+			 a++;
+			 }
+			return S;
+		}
+		
+		}
