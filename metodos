@@ -1,0 +1,65 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda 
+	Twitter: @arithgrey
+	Mail: arithgrey@gmail.com	
+	
+*/
+package excep;
+public class metodos {
+
+	/*Arreglos para generar las cadenas */
+	private String cadAlea[]={"@wq", "[r","d&]", "d#","43","<.<T>$", "po","s7", "pf", "Dx", "Xzz","ls","1", "=2","$9"};
+	private String Errores[]={"@","[","<","=","$"};//Valores erróneos en las contraseñas 
+	
+	public String geneID() {
+	
+		String ID="";
+		int a=0;
+		
+		while(a<=cadAlea.length-1){ /*Ciclo*/
+			
+			int g=(int)(Math.random()*15); /*Valor aleatorio */	
+			ID+=cadAlea[g]; /*Concatenamos a la cadena la posición del arreglo cadAlea*/			
+			a++;
+		}
+		return ID; /*Regresamos la cadena formada */
+	}
+	 
+	 
+		/*Función que se encarga de validar la cadena formada */
+	  public int validacioN(String cadena){
+	    			  	
+		  	int categoria=0;
+			String S="";
+			int a=0;
+	    	StringBuffer br=new StringBuffer(cadena);
+	    	char  cad=br.charAt(0); /*Obtenemos el primer carácter de la cadena formada */
+	    	
+	    	while(a<=Errores.length-1){  
+	    									 /*De acuerdo al primer carácter asignamos el tipo de categoría */
+	    		switch(cad){
+	    	
+	    		case '@':{
+	    			categoria=5;
+	    			break;
+	    		}case '=':{
+	    			categoria=4;
+	    			break;
+	    		}case '$':{
+	    			categoria=3;
+	    			break;
+	    		}case '<':{
+	    			categoria=2;
+	    			break;
+	    		}case '[':{
+	    			categoria=1;
+	    			break;
+	    		}default:{
+	    			
+	    			}
+	    		}
+	    		a++;
+	    	}
+	    	return categoria;  /*Regresamos la categoría de la cadena*/
+	  }
+}
