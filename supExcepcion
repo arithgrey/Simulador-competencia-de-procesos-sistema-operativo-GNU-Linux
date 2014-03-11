@@ -1,0 +1,125 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda 
+	Twitter: @arithgrey
+	Mail: arithgrey@gmail.com	
+	
+*/
+package excep;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class supExcepcion extends JFrame {
+
+	/*Elementos swing privados que forman el aspecto visual del software */
+	private JButton getProceso, bSalir;
+	private JTextArea area, areaErrores, aAtencion, areaFinal;
+	private JScrollPane barra, barraErrores, bAtencion , barraFinal;
+	private Controlador manejador;
+	private JLabel lista1,lista2, lista3A ,ePrioridad;
+	
+	public supExcepcion() {
+	
+		super("Simulador de interrupciones por Medrano Salazar Jonathan"); /*Encabezado del Jpanel */
+		
+		JDesktopPane p=new JDesktopPane(); /*Objeto contenedor de la interfaz gráfico */
+		
+		manejador=new Controlador(); /*Objeto controlador */
+		
+		getProceso=new JButton("Inicio");                    /*Inicial izamos todos los componentes gráficos */
+		bSalir=new JButton("Salir");
+		
+		area=new JTextArea();
+		areaErrores=new JTextArea();
+		aAtencion=new JTextArea();
+		areaFinal=new JTextArea();
+		
+		barra=new JScrollPane(area);
+		barraErrores=new JScrollPane(areaErrores);
+		bAtencion=new JScrollPane(aAtencion);
+		barraFinal=new JScrollPane(areaFinal);
+		
+		lista1=new JLabel("Lista original");
+		lista2=new JLabel("Lista de errores");
+		lista3A=new JLabel("Lista atención");
+		ePrioridad=new JLabel("Prioridad 5 (De primer atención):@  
+			Prioridad 4:(=) Prioridad 3:$  Prioridad 2:<  prioridad(De menor atención)1:[");
+		
+					/*Insertamos todos los componentes gráficos al panel */
+
+		p.add(getProceso);
+		p.add(bSalir);
+		
+		p.add(barraErrores);
+		p.add(barra);
+		p.add(barraFinal);
+		
+		p.add(lista1);
+		p.add(lista2);
+		
+		p.add(bAtencion);
+		p.add(lista3A);
+		 
+		p.add(ePrioridad);
+											/*Asignamos posiciones y tamaños a cada componente gráfico */		
+										
+		barra.setBounds(10, 80, 340, 500);
+		barraErrores.setBounds(355, 80, 300, 500);
+		getProceso.setBounds(10, 10, 80, 23);
+		bSalir.setBounds(10, 40, 80, 23);
+		bAtencion.setBounds(660, 80, 300, 500);
+		barraFinal.setBounds(963, 80, 330, 500);
+		
+		
+		lista1.setBounds(150, 30, 120, 23);
+		lista2.setBounds(450, 30, 120, 23);
+		lista3A.setBounds(800, 30, 120, 23);
+		ePrioridad.setBounds(150, 10, 900,  23);
+		
+		
+		this.add(p, BorderLayout.CENTER);  
+		this.setVisible(true);/*Hacemos visible al  panel*/
+		this.setSize(1300, 650); /*Damos una altura y un ancho al panel contenedor */
+		this.setLocationRelativeTo(null); 
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); /*Termina todos los procesos al cerrar el panel */
+		
+
+		getProceso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	
+				manejador.indxContrasena();  /*Mandamos a llamar la función indxContrasena de nuestra clase controlador */
+				area.setText(manejador.getIndx());
+				areaErrores.setText(manejador.validando()); /*Imprimimos en el JTextArea los informes de atención */
+				
+				String T="";
+				T+=manejador.atendiendoErroresCat5()
+						+"\n"+manejador.atendiendoErroresCat4()
+						+"\n"+manejador.atendiendoErroresCat3()
+						+"\n"+manejador.atendiendoErroresCat2()
+						+"\n"+manejador.atendiendoErroresCat1();
+				
+				
+				aAtencion.setText(T);
+				areaFinal.setText(manejador.getIndx());
+			
+				}
+				
+		});
+
+
+		/*Acción para el botón salir con el cual la ejecución del programa se da por terminada  */
+		bSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					
+				System.exit(0);
+			}
+		});
+		
+	}
+	public static void main(String[] args) {
+		
+		/*Iniciamos el software */
+		supExcepcion Ex=new supExcepcion();
+	
+	}
+}
+
